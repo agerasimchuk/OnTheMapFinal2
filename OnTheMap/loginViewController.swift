@@ -126,7 +126,7 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(self.username.text)\", \"password\": \"\(self.password.text)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         */
-        request.HTTPBody = "{\"udacity\": {\"username\": \"anya.gerasimchuk@ge.com\", \"password\": \"Saratov2005\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"udacity\": {\"username\": \"anya.gerasimchuk@ge.com\", \"password\": \"Saratov2005w\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         let session = NSURLSession.sharedSession()
         
@@ -139,27 +139,44 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let parsedData: NSDictionary?
             do{
-                parsedData = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                parsedData = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                 print("parsedData is: \(parsedData)")
                 
                 
-            }catch
+            } catch
+                //NEED TO SET PARSEDDATE TO NIL, OTHERWISE IT WILL THROW AN ERROR IN THE LET BADCREDENTIALS LINE: https://discussions.udacity.com/t/nil-value-if-entering-wrong-credentials/33053/4
+                
                 let parsingDataError as NSError {
+                    parsedData = nil
                     print("JSON error: \(parsingDataError.localizedDescription)")
+                    // report error…
+                    return
             }
             
             
-            let badCredentials: String? = parsedData?.valueForKey("error")
+            let badCredentials: String? = parsedData?.valueForKey("error") as? String
             if badCredentials != nil {
-                // handle error
-                return
-            }
+                
 
-                let mysession = parsedData!.valueForKey("session") as! [String: AnyObject]
+                    print(badCredentials)
+                    self.debugLabel.text = badCredentials
+                    
+                    // handle error
+                    return
+
+
+                
+                
+
+            }
+           
+            if let mysession = parsedData?.valueForKey("session") as? [String: AnyObject]{
                 let sessionID = mysession["id"]
                 print("Will login now with sessionsID: \(sessionID)")
-                self.completeLogin()
-           
+            }else{
+                print("mysession or sessionID is nil")
+            }
+           self.completeLogin()
             
             
             
