@@ -176,47 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2YT-SR-zEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2371.5" y="776"/>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="C0p-Pk-pG5">
-            <objects>
-                <viewController id="9ZM-6a-gKx" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eFI-gO-j8f"/>
-                        <viewControllerLayoutGuide type="bottom" id="8MR-Ry-eWV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sWB-pF-mcp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TABLE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stW-XT-2kP">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="186" y="276" width="52" height="21"/>
-                                </variation>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="stW-XT-2kP"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="stW-XT-2kP"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="cWn-dY-X3v"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iql-um-GTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2371.5" y="114"/>
+            <point key="canvasLocation" x="2326.5" y="869"/>
         </scene>
         <!--mapView-->
         <scene sceneID="WHR-zd-z2W">
@@ -229,18 +189,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9ZM-6a-gKx" kind="relationship" relationship="viewControllers" id="5C2-V1-G21"/>
-                        <segue destination="qV5-Bt-unc" kind="relationship" relationship="viewControllers" id="h2D-4B-PAq"/>
+                        <segue destination="MVW-iB-nsf" kind="relationship" relationship="viewControllers" id="WaJ-MW-Z46"/>
+                        <segue destination="qV5-Bt-unc" kind="relationship" relationship="viewControllers" id="YA8-Py-MzF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0T0-C2-xXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1441.5" y="445"/>
         </scene>
-        <!--testStoryBoards-->
+        <!--mainMapView-->
         <scene sceneID="szJ-cq-Y8Z">
             <objects>
-                <viewController storyboardIdentifier="testStoryBoards" title="testStoryBoards" id="MVW-iB-nsf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testStoryBoards" title="mainMapView" id="MVW-iB-nsf" customClass="mainMapView" customModule="OnTheMap" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Bm-Yt-DjR"/>
                         <viewControllerLayoutGuide type="bottom" id="FMo-Jm-X7B"/>
@@ -249,32 +209,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="testStoryBoards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1b-V6-v8d">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="36" y="218" width="316" height="21"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Pmj-Cr-z7G">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="20" width="360" height="531"/>
                                 </variation>
-                            </label>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pmj-Cr-z7G" firstAttribute="top" secondItem="5Bm-Yt-DjR" secondAttribute="bottom" id="Cr4-og-tiD"/>
+                            <constraint firstItem="Pmj-Cr-z7G" firstAttribute="bottom" secondItem="FMo-Jm-X7B" secondAttribute="top" id="M52-oQ-kmB"/>
+                            <constraint firstAttribute="trailing" secondItem="Pmj-Cr-z7G" secondAttribute="trailing" id="gIn-Ll-rvz"/>
+                            <constraint firstItem="Pmj-Cr-z7G" firstAttribute="leading" secondItem="tDc-MO-NVV" secondAttribute="leading" id="mgq-EC-N9m"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="I1b-V6-v8d"/>
+                                <exclude reference="Pmj-Cr-z7G"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Cr4-og-tiD"/>
+                                <exclude reference="M52-oQ-kmB"/>
+                                <exclude reference="gIn-Ll-rvz"/>
+                                <exclude reference="mgq-EC-N9m"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="I1b-V6-v8d"/>
+                                <include reference="Pmj-Cr-z7G"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Cr4-og-tiD"/>
+                                <include reference="M52-oQ-kmB"/>
+                                <include reference="gIn-Ll-rvz"/>
+                                <include reference="mgq-EC-N9m"/>
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="uX8-rp-iwD"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <connections>
+                        <outlet property="myMap" destination="Pmj-Cr-z7G" id="Fxo-Lx-SzV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4lQ-rK-pRS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1431" y="1183"/>
+            <point key="canvasLocation" x="2326.5" y="206"/>
         </scene>
     </scenes>
 </document>

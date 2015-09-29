@@ -126,7 +126,7 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(self.username.text)\", \"password\": \"\(self.password.text)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         */
-        request.HTTPBody = "{\"udacity\": {\"username\": \"anya.gerasimchuk@ge.com\", \"password\": \"Saratov2005w\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"udacity\": {\"username\": \"anya.gerasimchuk@ge.com\", \"password\": \"Saratov2005\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         let session = NSURLSession.sharedSession()
         
@@ -156,18 +156,12 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let badCredentials: String? = parsedData?.valueForKey("error") as? String
             if badCredentials != nil {
-                
 
                     print(badCredentials)
                     self.debugLabel.text = badCredentials
                     
                     // handle error
                     return
-
-
-                
-                
-
             }
            
             if let mysession = parsedData?.valueForKey("session") as? [String: AnyObject]{

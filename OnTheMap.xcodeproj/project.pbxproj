@@ -16,6 +16,8 @@
 		1567AD8C1BB08C76002708FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8B1BB08C76002708FE /* Images.xcassets */; };
 		1567AD8F1BB08C76002708FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8D1BB08C76002708FE /* LaunchScreen.xib */; };
 		1567AD9B1BB08C76002708FE /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */; };
+		1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597FC531BBAD9FC00838F64 /* mainMapView.swift */; settings = {ASSET_TAGS = (); }; };
+		1597FC561BBADCB100838F64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1597FC551BBADCB100838F64 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		1567AD941BB08C76002708FE /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1567AD991BB08C76002708FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapTests.swift; sourceTree = "<group>"; };
+		1597FC531BBAD9FC00838F64 /* mainMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainMapView.swift; sourceTree = "<group>"; };
+		1597FC551BBADCB100838F64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1540B8041BB222D20092B534 /* FBSDKLoginKit.framework in Frameworks */,
+				1597FC561BBADCB100838F64 /* MapKit.framework in Frameworks */,
 				1540B8021BB1D2EE0092B534 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +80,7 @@
 		1540B8061BB448560092B534 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1597FC531BBAD9FC00838F64 /* mainMapView.swift */,
 			);
 			name = View;
 			path = ..;
@@ -116,6 +122,7 @@
 				1567AD861BB08C76002708FE /* loginViewController.swift */,
 				1567AD8B1BB08C76002708FE /* Images.xcassets */,
 				1567AD8D1BB08C76002708FE /* LaunchScreen.xib */,
+				1597FC551BBADCB100838F64 /* MapKit.framework */,
 				1540B8031BB222D20092B534 /* FBSDKLoginKit.framework */,
 				1540B8011BB1D2EE0092B534 /* FBSDKCoreKit.framework */,
 				1567AD821BB08C76002708FE /* Supporting Files */,
@@ -199,6 +206,11 @@
 				TargetAttributes = {
 					1567AD7E1BB08C76002708FE = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					1567AD931BB08C76002708FE = {
 						CreatedOnToolsVersion = 6.4;
@@ -252,6 +264,7 @@
 			files = (
 				1567AD871BB08C76002708FE /* loginViewController.swift in Sources */,
 				1540B8091BB4490E0092B534 /* OTMClient.swift in Sources */,
+				1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */,
 				1567AD851BB08C76002708FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
