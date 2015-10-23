@@ -126,7 +126,7 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(self.username.text)\", \"password\": \"\(self.password.text)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         */
-        request.HTTPBody = "{\"udacity\": {\"username\": \"anya.gerasimchuk@ge.com\", \"password\": \"Saratov2005\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"udacity\": {\"username\": \"xxxxxxxxxx\", \"password\": \"xxxxxxxxxxx\"}}".dataUsingEncoding(NSUTF8StringEncoding)
 
         let session = NSURLSession.sharedSession()
         
