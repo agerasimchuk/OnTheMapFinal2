@@ -13,6 +13,7 @@ struct studentsModel {
     
     var first = ""
     var last = ""
+    var subtitle = ""
 
     
     init(dictionary: [String : AnyObject]) {
@@ -20,6 +21,7 @@ struct studentsModel {
         
         first = dictionary["firstName"] as! String
         last = dictionary["lastName"] as! String
+        subtitle = dictionary["mediaURL"] as! String
     }
     
     static func studentsFromResults(results: [[String : AnyObject]]) -> [studentsModel] {

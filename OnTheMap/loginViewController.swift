@@ -25,30 +25,32 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //CHECK IF FB TOKEN EXISTS
-        //if (FBSDKAccessToken.currentAccessToken() != nil)
-        //{
+        if (FBSDKAccessToken.currentAccessToken() != nil)
+        {
             // User is already logged in, do work such as go to next view controller.
-        ////}
-        //else
-        //{
+            completeLogin()
+        }
+        else
+        {
+        
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
             self.view.addSubview(loginView)
-            //loginView.center = self.view.center
+            loginView.center = self.view.center
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
+         
+            FBSDKAccessToken.currentAccessToken()?.tokenString!
             
-            //FBSDKAccessToken .currentAccessToken().tokenString
-        
 
 
         
         
         
             print("ha")
-            //print(FBSDKAccessToken.currentAccessToken().tokenString)
+            print(FBSDKAccessToken.currentAccessToken()?.tokenString!)
             
             
-        //}
+        }
         
     }
 
@@ -99,11 +101,14 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     // END METHODS FOR BACEBOOK LOGIN BUTTON
 
-
+    
+    //LOGIN VIE UDACITY
     @IBAction func loginButtonTouch(sender: AnyObject) {
         if userText.text!.isEmpty {
+            debugLabel.hidden = false
             debugLabel.text = "Username Empty."
         } else if passText.text!.isEmpty {
+            debugLabel.hidden = false
             debugLabel.text = "Password Empty."
         } else {
             
@@ -117,17 +122,17 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         //printauthenticating...")
         let mysession : String? = nil
         
+        var username :String = ""
+        var password : String = ""
+        
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        /*--CORRECT FORMATING FOR LATER
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(self.username.text)\", \"password\": \"\(self.password.text)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-
-        */
-        request.HTTPBody = "{\"udacity\": {\"username\": \"xxxxxxxxxx\", \"password\": \"xxxxxxxxxxx\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-
+        
+        request.HTTPBody = "{\"udacity\": {\"username\": \"\(userText!.text!)\", \"password\": \"\(passText!.text!)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
+        
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -229,6 +234,7 @@ let parsedData = try? NSJSONSerialization.JSONObjectWithData(newData, options: N
             do{
                 let parsedData = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                     print("parsedData is: \(parsedData)")
+                    self.completeLogin()
                 
                 
             }catch

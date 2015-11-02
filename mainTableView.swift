@@ -10,94 +10,119 @@ import Foundation
 import UIKit
 
 
-class mainTableView: UIViewController, UITableViewDelegate{
+class mainTableView: UIViewController, UITableViewDelegate, UIScrollViewDelegate, UITableViewDataSource{
     
     
     var students: [studentsModel] = [studentsModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //EXPLANATION ON WHY WE NEED DATASOURCE AND DELEGATE FOR A VIEW TO DISPLAY INFORMATION IN A TABLE: http://stackoverflow.com/questions/11465579/how-to-set-up-uitableview-within-a-uiviewcontroller-created-on-a-xib-file
+        
+          self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) in
+            if success{
+                self.displayStudents(studentData)
+            }else{
+                
+            }
+        }
     }
     
+    @IBAction func refreshButton(sender: AnyObject) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+            
+            
+        }
+    }
     
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        
+    }
     
-        //THIS CAN BE LATER MOVED TO THE MODEL AREA
-        print("In Student Locations Model")
+    func displayStudents(studentData: [[String: AnyObject]]){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        let results = studentData
         
-        
-        let session = NSURLSession.sharedSession()
-        
-        
-        
-        
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
-                return
-            }
+        self.students = studentsModel.studentsFromResults(results)
+        //print("THIS IS STUDENS: \(self.students)")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
             
-            do{
-                let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                
-                
-                //BUILD THE ARRAY
-                let results = parsedData.valueForKey("results") as! [[String: AnyObject]]
-                
-                
-                print("reuslt are here: \(results)")
-                
-                //GET ANNOTATIONS ARRAY, CONVERT TO MKPOINTANNOTATIONS AND ADD TO MAP
-                //BUILD THE ARRAY
-                
-                self.students = studentsModel.studentsFromResults(results)
-                print("THIS IS STUDENS: \(self.students)")
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                    print("HAAHAHAHAHA")
-
-                }
-                
-            }catch
-                //NEED TO SET PARSEDDATE TO NIL, OTHERWISE IT WILL THROW AN ERROR IN THE LET BADCREDENTIALS LINE: https://discussions.udacity.com/t/nil-value-if-entering-wrong-credentials/33053/4
-                
-                let parsingDataError as NSError {
-                    //let parsedData = nil
-                    print("JSON error: \(parsingDataError.localizedDescription)")
-                    // report error…
-                    return
-                    
-            }
+            
         }
-        task.resume()
 
     }
 
+    //FORMATTING FOR THE TABLE http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
     
     @IBOutlet var tableView: UITableView!
 
+    
+
+   
+
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+            
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = CGFloat(2)
+          
+            
         print("THIS IS MY TABLE")
         print(students)
+            
         /* Get cell type */
         let cellReuseIdentifier = "mainTableViewCell"
         let student = students[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
+
+
+        
         
         /* Set cell defaults */
-        cell.textLabel!.text = student.first
+        //cell.textLabel!.text = student.first + student.last
+            cell.textLabel!.text = "\(student.first),  \(student.last)"
+
+            //cellSub.text = student.subtitle
+            cell.detailTextLabel?.text = student.subtitle
+            
         
         
         // TODO: Get the poster image, then populate the cell's image view
         
         return cell
+    }
+    
+        var url:String = ""
+    
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+
+        
+        url = students[indexPath.row].subtitle
+        
+        let app = UIApplication.sharedApplication()
+        
+        //MAKE SURE THE URL IS VALID AND DOES NOT RETURN NIL
+        if let myUrl : NSURL = NSURL(string: url){
+            print("THIS IS URL: \(myUrl)")
+            app.openURL(myUrl)
+            
+        }else{
+            print("NO VALID URL")
+        }
+        
+        
+
+        /*
+        if control == annotationView.rightCalloutAccessoryView {
+        
+        }
+*/
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,4 +138,22 @@ class mainTableView: UIViewController, UITableViewDelegate{
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func logoutButton(sender: AnyObject) {
+        func completeLogout() {
+            
+            convienceModel.sharedInstance().logoutAction()
+            
+            
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                print("In completeLogout")
+                
+                
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController")
+                self.presentViewController(controller, animated: true, completion: nil)
+            })
+        }
+        
+
+    }
 }

@@ -31,6 +31,10 @@ class addLocationView: UIViewController, UISearchBarDelegate{
     var mytitle: String = ""
     
     
+    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var firstName: UITextField!
+    @IBOutlet var lastName: UITextField!
+    @IBOutlet var urlLocation: UITextField!
     
     @IBAction func showSearchBar(sender: AnyObject) {
         searchController = UISearchController(searchResultsController: nil)
@@ -42,7 +46,7 @@ class addLocationView: UIViewController, UISearchBarDelegate{
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+                    self.infoLabel.text=""
     }
 
 
@@ -90,25 +94,37 @@ class addLocationView: UIViewController, UISearchBarDelegate{
     }
     
     @IBAction func addPinAction(sender: AnyObject) {
-        print("ADD PIN?")
         
+       
+        
+        //EXCELLENT ARTICLE ABOUT OPTIONALS http://www.touch-code-magazine.com/swift-optionals-use-let/
+        
+        let first: String? = firstName.text
+        let second: String? = lastName.text
+        let url: String? = urlLocation.text
+        
+        if firstName.text!.isEmpty {
+            print("emplye first name")
+            self.infoLabel.text="Enter First Name"
+        } else if lastName.text!.isEmpty {
+            print("last name emptry")
+            self.infoLabel.text="Enter Last Name"
+        } else if urlLocation.text!.isEmpty{
+            print("url empty")
+            self.infoLabel.text="Enter URL"
 
-        lat = self.pointAnnotation.coordinate.latitude
-        long = self.pointAnnotation.coordinate.longitude
-        mytitle = self.pointAnnotation.title!
-        
-        
-        //print("TITLE IS: \(mytite)")
+        }else if let lat = self.pointAnnotation?.coordinate.latitude{
+            
+            let long = self.pointAnnotation.coordinate.longitude
+            let lat = self.pointAnnotation.coordinate.latitude
+
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"A\", \"lastName\": \"B\",\"mapString\": \(self.pointAnnotation.title), \"mediaURL\": \"https://udacity.com\",\"latitude\": \(self.pointAnnotation.coordinate.latitude), \"longitude\": \(self.pointAnnotation.coordinate.longitude)}".dataUsingEncoding(NSUTF8StringEncoding)
-        //request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \(title), \"mediaURL\": \"https://udacity.com\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
-        //print("THIS IS MY JSON: \(request.HTTPBody)")
-        
-        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Anya\", \"lastName\": \"G\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
+            
+        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"\(first!)\", \"lastName\": \"\(second!)\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"\(url!)\",\"latitude\": \(lat), \"longitude\": \(long)}".dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -118,13 +134,17 @@ class addLocationView: UIViewController, UISearchBarDelegate{
             }
             print("THERE")
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            
-            //let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            //print(parsedData)
 
-        }
+
+
+            }
         task.resume()
-        
+                self.navigationController!.popViewControllerAnimated(true)
+        }else{
+            self.infoLabel.text="Enter your location"
+        }
+
+
     }
 
     

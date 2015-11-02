@@ -7,19 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152D54BB1BDEE9EC005C3F51 /* convienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D54BA1BDEE9EB005C3F51 /* convienceModel.swift */; settings = {ASSET_TAGS = (); }; };
 		153469EA1BD42FD500EAE91E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153469E91BD42FD500EAE91E /* CoreLocation.framework */; };
 		1540B8021BB1D2EE0092B534 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8011BB1D2EE0092B534 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
 		1540B8041BB222D20092B534 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8031BB222D20092B534 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
-		1540B8091BB4490E0092B534 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1540B8081BB4490E0092B534 /* OTMClient.swift */; settings = {ASSET_TAGS = (); }; };
 		1567AD851BB08C76002708FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD841BB08C76002708FE /* AppDelegate.swift */; };
 		1567AD871BB08C76002708FE /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD861BB08C76002708FE /* loginViewController.swift */; };
 		1567AD8A1BB08C76002708FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD881BB08C76002708FE /* Main.storyboard */; };
 		1567AD8C1BB08C76002708FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8B1BB08C76002708FE /* Images.xcassets */; };
 		1567AD8F1BB08C76002708FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8D1BB08C76002708FE /* LaunchScreen.xib */; };
 		1567AD9B1BB08C76002708FE /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */; };
-		157055B41BC73BCD009B0997 /* locationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157055B31BC73BCD009B0997 /* locationModel.swift */; settings = {ASSET_TAGS = (); }; };
 		158066391BBEF7B80047DC54 /* annotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158066381BBEF7B80047DC54 /* annotationModel.swift */; settings = {ASSET_TAGS = (); }; };
-		1580663B1BBF4FB20047DC54 /* studentLocationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1580663A1BBF4FB20047DC54 /* studentLocationsModel.swift */; settings = {ASSET_TAGS = (); }; };
 		1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597FC531BBAD9FC00838F64 /* mainMapView.swift */; settings = {ASSET_TAGS = (); }; };
 		1597FC561BBADCB100838F64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1597FC551BBADCB100838F64 /* MapKit.framework */; };
 		15A227131BCD86D000762257 /* mainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A227121BCD86D000762257 /* mainTableView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -38,10 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		152D54BA1BDEE9EB005C3F51 /* convienceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = convienceModel.swift; sourceTree = "<group>"; };
 		153469E91BD42FD500EAE91E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1540B8011BB1D2EE0092B534 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		1540B8031BB222D20092B534 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		1540B8081BB4490E0092B534 /* OTMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
 		1567AD7F1BB08C76002708FE /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1567AD831BB08C76002708FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1567AD841BB08C76002708FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,9 +50,7 @@
 		1567AD941BB08C76002708FE /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1567AD991BB08C76002708FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapTests.swift; sourceTree = "<group>"; };
-		157055B31BC73BCD009B0997 /* locationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationModel.swift; sourceTree = "<group>"; };
 		158066381BBEF7B80047DC54 /* annotationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = annotationModel.swift; sourceTree = "<group>"; };
-		1580663A1BBF4FB20047DC54 /* studentLocationsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studentLocationsModel.swift; sourceTree = "<group>"; };
 		1597FC531BBAD9FC00838F64 /* mainMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainMapView.swift; sourceTree = "<group>"; };
 		1597FC551BBADCB100838F64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		15A227121BCD86D000762257 /* mainTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTableView.swift; sourceTree = "<group>"; };
@@ -87,11 +83,9 @@
 		1540B8051BB4484B0092B534 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1540B8081BB4490E0092B534 /* OTMClient.swift */,
 				158066381BBEF7B80047DC54 /* annotationModel.swift */,
-				1580663A1BBF4FB20047DC54 /* studentLocationsModel.swift */,
-				157055B31BC73BCD009B0997 /* locationModel.swift */,
 				15E9F00D1BD1BEE1003D6C32 /* studentsModel.swift */,
+				152D54BA1BDEE9EB005C3F51 /* convienceModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -136,9 +130,9 @@
 		1567AD811BB08C76002708FE /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				1540B8051BB4484B0092B534 /* Model */,
 				1540B8071BB448600092B534 /* Controller */,
 				1540B8061BB448560092B534 /* View */,
-				1540B8051BB4484B0092B534 /* Model */,
 				1567AD841BB08C76002708FE /* AppDelegate.swift */,
 				1567AD881BB08C76002708FE /* Main.storyboard */,
 				1567AD861BB08C76002708FE /* loginViewController.swift */,
@@ -285,11 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1567AD871BB08C76002708FE /* loginViewController.swift in Sources */,
-				1540B8091BB4490E0092B534 /* OTMClient.swift in Sources */,
 				158066391BBEF7B80047DC54 /* annotationModel.swift in Sources */,
+				152D54BB1BDEE9EC005C3F51 /* convienceModel.swift in Sources */,
 				1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */,
-				1580663B1BBF4FB20047DC54 /* studentLocationsModel.swift in Sources */,
-				157055B41BC73BCD009B0997 /* locationModel.swift in Sources */,
 				15E9F00E1BD1BEE1003D6C32 /* studentsModel.swift in Sources */,
 				15A227131BCD86D000762257 /* mainTableView.swift in Sources */,
 				1567AD851BB08C76002708FE /* AppDelegate.swift in Sources */,

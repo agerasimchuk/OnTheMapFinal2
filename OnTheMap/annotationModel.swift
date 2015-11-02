@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
+//THIS CLASS IS NOT NEEDED ANY MORE BUT KEEPING HERE FOR ANY REFERENCE
 class annotationModel : NSObject, MKAnnotation {
     private var coord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
