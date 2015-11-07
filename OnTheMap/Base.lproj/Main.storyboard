@@ -370,6 +370,7 @@
                                 <exclude reference="hgQ-BX-VuA"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="nYN-LI-xGR"/>
                                 <exclude reference="Cr4-og-tiD"/>
                                 <exclude reference="M52-oQ-kmB"/>
                                 <exclude reference="gIn-Ll-rvz"/>
@@ -377,7 +378,6 @@
                                 <exclude reference="8Yq-74-Boz"/>
                                 <exclude reference="AvC-cF-nz1"/>
                                 <exclude reference="Pw6-yv-q0U"/>
-                                <exclude reference="nYN-LI-xGR"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -386,6 +386,7 @@
                                 <include reference="hgQ-BX-VuA"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="nYN-LI-xGR"/>
                                 <include reference="Cr4-og-tiD"/>
                                 <include reference="M52-oQ-kmB"/>
                                 <include reference="gIn-Ll-rvz"/>
@@ -393,7 +394,6 @@
                                 <include reference="8Yq-74-Boz"/>
                                 <include reference="AvC-cF-nz1"/>
                                 <include reference="Pw6-yv-q0U"/>
-                                <include reference="nYN-LI-xGR"/>
                             </mask>
                         </variation>
                     </view>
