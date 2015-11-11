@@ -15,9 +15,11 @@ import FBSDKCoreKit
 class convienceModel: NSObject{
 
     //WHAT IS A SINGLETON: https://thatthinginswift.com/singletons/
+    var students: [studentsModel] = [studentsModel]()
     
-    
-    func getStudentLocations(completionHandler: (success: Bool, studentData: [[String: AnyObject]], errorString: String?)->Void){
+
+    func getStudentData(completionHandler: (success: Bool, data: NSData?, errorString: String)->Void){
+
 //THIS CAN BE LATER MOVED TO THE MODEL AREA
         print("In Student Locations Convience")
    
@@ -32,86 +34,70 @@ class convienceModel: NSObject{
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
 
-
         let session = NSURLSession.sharedSession()
-
-
-
-
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
-            
+            //let myData: NSData? = data
+           
             if error != nil { // Handle error...
-                    print("CANNOT DOWNLOAD DATA")
-                    //let error = error
-                    return
+                print("CANNOT DOWNLOAD DATA")
+                print("Error: \(error)")
+                //let errorString = error
+                completionHandler(success: false, data: nil, errorString: "CONNECTION PROBLEMS")
                 
+            }else{
+                print("SUCCESS")
+                completionHandler(success: true, data: data, errorString: "Success")
+
             }
-
+        }
+                task.resume()
+    }
     
-    do{
+ 
+    
+     func getStudentLocations(completionHandler: (success: Bool, studentData: [[String: AnyObject]]!, errorString: String?)-> Void){
         
-        let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+        getStudentData(){(success, data, errorString) in
 
+            if success{
+                do{
+                    print("THIS IS DATA: \(data!)")
+                    let parsedData = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
         
-            if let results = parsedData.valueForKey("results") as? [[String: AnyObject]]{
-
-
-                
+                    if let results = parsedData.valueForKey("results") as? [[String: AnyObject]]{
+                    print("MY RESULTS ARE: \(results)")
                     completionHandler(success: true, studentData: results, errorString: "Data is good")
-            }
-        //print("reuslt are here: \(results)")
-        }catch
-        //NEED TO SET PARSEDDATE TO NIL, OTHERWISE IT WILL THROW AN ERROR IN THE LET BADCREDENTIALS LINE: https://discussions.udacity.com/t/nil-value-if-entering-wrong-credentials/33053/4
+                    }else{
+
+                        completionHandler(success: false, studentData: nil, errorString: "Data Problems")
+                    }
+
+                }catch
+                    //NEED TO SET PARSEDDATE TO NIL, OTHERWISE IT WILL THROW AN ERROR IN THE LET BADCREDENTIALS LINE: https://discussions.udacity.com/t/nil-value-if-entering-wrong-credentials/33053/4
         
-        let parsingDataError as NSError {
-            //let parsedData = nil
-            print("JSON error: \(parsingDataError.localizedDescription)")
-            // report error…
-            return
+                    let parsingDataError as NSError {
+
+                        print("JSON error: \(parsingDataError.localizedDescription)")
+
+                        completionHandler(success: false, studentData: nil, errorString: "Data parsing problems")
+                        return
+                    }
             
-            
+                return
             }
+            
+            else{
+                print("PARSED ERROR")
+                completionHandler(success: false, studentData: nil, errorString: "There was a problem downloading student data")
+                return
+            }
+
             
         }
-        task.resume()
-        
-        //completionHandler(success: true, studentData: nil, errorString: "Data is good")
-         print("CANNOT DOWNLOAD DATA2")
-      return
-       
+        //task.resume()
+        return
     }
-    
-    /*
-    func getAnnotations(){
-        //GET ANNOTATIONS ARRAY, CONVERT TO MKPOINTANNOTATIONS AND ADD TO MAP
-        
-        var annotations = [MKPointAnnotation]()
-        
-        for Dictionary in results{
-            let lat = CLLocationDegrees(Dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(Dictionary["longitude"] as! Double)
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
-            let first = Dictionary["firstName"] as! String
-            let last = Dictionary["lastName"] as! String
-            let mediaURL = Dictionary["mediaURL"] as! String
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
-            
-            annotations.append(annotation)
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.myMap.addAnnotation(annotation)
-            })
-            
-        }
-        
-    }
-*/
     
     func logoutAction(){
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
@@ -139,17 +125,13 @@ class convienceModel: NSObject{
 
         
     func getRequestToken(userText: String, passText : String, completionHandler: (success: Bool, errorString: String) -> Void) {
-        //func getRequestToken(completionHandler: (success: Bool, errorString: String) -> Void) {
-        
+ 
 print("In Token function")
         //printauthenticating...")
         let mysession : String? = nil
         
         var username :String = userText
         var password : String = passText
-            
-        //var username :String = "anya.gerasimchuk@ge.com"
-        //var password : String = "Saratov2005"
         
         print("username: \(username)")
         print("password: \(password)")
@@ -201,9 +183,7 @@ print("In Token function")
             if badCredentials != nil {
                 
                 print("Bad Credentials: \(badCredentials)")
-                //self.debugLabel.text = badCredentials
-                //self.presentAlert("Either Password or Username is wrong.")
-                
+
                 // handle error
                 completionHandler(success: false, errorString: "Username or Password is wrong")
                 return
@@ -219,11 +199,10 @@ print("In Token function")
                 completionHandler(success: false, errorString: "Error login in")
                 
             }
-         //self.completeLogin()
+
         }
             task.resume()
-            
-            //return
+
     }
      
     func loginWithFacebook(fbToken: String, completionHandler: (success: Bool, errorString: String) -> Void) {
@@ -242,12 +221,7 @@ print("In Token function")
             
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
             print("newData is: \(newData)")
-            
-            
-            /*
-            let parsedData = try? NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-            */
-            
+
             do{
                 let parsedData = try NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                 print("parsedData is: \(parsedData)")
@@ -261,10 +235,7 @@ print("In Token function")
                     print("JSON error: \(parsingDataError.localizedDescription)")
                      completionHandler(success: false, errorString: "Could not get correct information")
             }
-            
-            
-            //print(NSString(data: parsedData, encoding: NSUTF8StringEncoding))
-            
+
         }
         task.resume()
     }
@@ -282,7 +253,6 @@ print("In Token function")
             request.HTTPMethod = "POST"
             request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
             request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        //request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gYTEST", forHTTPHeaderField: "X-Parse-REST-API-Key")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
     
         print("First: \(first)")
@@ -327,9 +297,7 @@ print("In Token function")
                     if badCredentials != nil {
                         
                         print("Bad Credentials: \(badCredentials)")
-                        //self.debugLabel.text = badCredentials
-                        //self.presentAlert("Either Password or Username is wrong.")
-                        
+
                         // handle error
                         completionHandler(success: false, errorString: "Unauthorized request")
                         return

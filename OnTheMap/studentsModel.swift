@@ -9,14 +9,19 @@
 import Foundation
 import UIKit
 
-struct studentsModel {
+//private let sharedInstance = studentsModel(dictionary: [String : AnyObject])
+
+
+private var students: [studentsModel] = [studentsModel]()
+
+class studentsModel {
     
     var first = ""
     var last = ""
     var subtitle = ""
 
     
-    init(dictionary: [String : AnyObject]) {
+    private init(dictionary: [String : AnyObject]) {
       
         
         first = dictionary["firstName"] as! String
@@ -35,6 +40,10 @@ struct studentsModel {
         }
         
         return location
+    }
+    
+    class var sharedInstance: studentsModel {
+        return self.sharedInstance
     }
     
 }

@@ -101,44 +101,46 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     
-   
-    
     func presentAlert(messageString: String){
-        
         dispatch_async(dispatch_get_main_queue(), {
-   
-        //FORM AN ALERT
-        var message = messageString
         
-        let alertController = UIAlertController(title: "Achtung!", message: message, preferredStyle:
+            
+            //SHAKE ALERT
+            let shake:CABasicAnimation = CABasicAnimation(keyPath: "position")
+            shake.duration = 0.1
+            shake.repeatCount = 2
+            shake.autoreverses = true
+            
+            
+            let from_point:CGPoint = CGPointMake(self.loginButton.center.x - 5, self.loginButton.center.y)
+            let from_value:NSValue = NSValue(CGPoint: from_point)
+            
+            let to_point:CGPoint = CGPointMake(self.loginButton.center.x + 5, self.loginButton.center.y)
+            let to_value:NSValue = NSValue(CGPoint: to_point)
+            
+            shake.fromValue = from_value
+            shake.toValue = to_value
+            
+            self.loginButton.layer.addAnimation(shake, forKey: "position")
+
+        //FORM AN ALERT
+        let message = messageString
+        
+        
+        let alertController = UIAlertController(title: "NEED INFORMATION!", message: message, preferredStyle:
             UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction (title: "ok", style: UIAlertActionStyle.Default){ action in
-        self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
+            
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+    })
         
-        //SHAKE ALERT
-        let shake:CABasicAnimation = CABasicAnimation(keyPath: "position")
-        shake.duration = 0.1
-        shake.repeatCount = 2
-        shake.autoreverses = true
-        
-        
-        let from_point:CGPoint = CGPointMake(self.loginButton.center.x - 5, self.loginButton.center.y)
-        let from_value:NSValue = NSValue(CGPoint: from_point)
-        
-        let to_point:CGPoint = CGPointMake(self.loginButton.center.x + 5, self.loginButton.center.y)
-        let to_value:NSValue = NSValue(CGPoint: to_point)
-        
-        shake.fromValue = from_value
-        shake.toValue = to_value
-        
-        self.loginButton.layer.addAnimation(shake, forKey: "position")
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-            })
     }
-    
+
     
     //LOGIN VIE UDACITY
     @IBAction func loginButtonTouch(sender: AnyObject) {
@@ -150,17 +152,19 @@ class loginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else {
             
             convienceModel.sharedInstance().getRequestToken(userText.text!, passText: passText.text!){ success, errorString in
+                
+                print("LOGING SUCCESS OR NOT: \(success)")
                                if success{
                     self.completeLogin()
                 }else{
                     self.presentAlert(errorString)
+
                 
                 }
             }
 
     }
 }
-
 
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {

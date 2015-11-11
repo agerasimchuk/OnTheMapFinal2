@@ -277,25 +277,25 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="List View" id="wVr-kd-PcR">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="refresh" id="BCQ-uU-M1Y">
-                            <connections>
-                                <action selector="refreshButton:" destination="afs-9U-ROm" id="34E-PX-1Fr"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="kAN-Vz-6s2">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eMv-V6-wtC">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="afs-9U-ROm" eventType="touchUpInside" id="xUG-OQ-ZMl"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" id="qqV-sv-TCP">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FqZ-d2-jlB">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Logout"/>
-                                    <connections>
-                                        <action selector="logoutButton:" destination="afs-9U-ROm" eventType="touchUpInside" id="Ezi-CD-i8L"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
                             <barButtonItem style="plain" systemItem="add" id="UMb-0l-Hog">
                                 <connections>
                                     <segue destination="0BV-Na-MHW" kind="show" id="UEd-AR-eOk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="refresh" id="BCQ-uU-M1Y">
+                                <connections>
+                                    <action selector="refreshButton:" destination="afs-9U-ROm" id="34E-PX-1Fr"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -398,21 +398,16 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Map View" id="g07-69-xpd">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="refresh" id="UrI-vP-AfM">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" style="plain" id="Bj8-Ne-f7V">
                             <connections>
-                                <action selector="refreshAction:" destination="MVW-iB-nsf" id="Wbh-Jb-bDP"/>
+                                <action selector="logoutButton:" destination="MVW-iB-nsf" id="9pB-4k-kQn"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" id="Bj8-Ne-f7V">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V7f-tk-JCG">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Logout"/>
-                                    <connections>
-                                        <action selector="logoutButton:" destination="MVW-iB-nsf" eventType="touchUpInside" id="lvn-L5-e1Q"/>
-                                    </connections>
-                                </button>
+                            <barButtonItem style="plain" systemItem="refresh" id="UrI-vP-AfM">
+                                <connections>
+                                    <action selector="refreshAction:" destination="MVW-iB-nsf" id="sNa-48-bal"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem style="plain" systemItem="add" id="zPi-uV-Kv7">
                                 <connections>
@@ -675,6 +670,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ypj-hZ-npe"/>
+        <segue reference="UEd-AR-eOk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,23 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		152D54BB1BDEE9EC005C3F51 /* convienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D54BA1BDEE9EB005C3F51 /* convienceModel.swift */; settings = {ASSET_TAGS = (); }; };
+		152D54BB1BDEE9EC005C3F51 /* convienceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152D54BA1BDEE9EB005C3F51 /* convienceModel.swift */; };
 		153469EA1BD42FD500EAE91E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153469E91BD42FD500EAE91E /* CoreLocation.framework */; };
-		1540B8021BB1D2EE0092B534 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8011BB1D2EE0092B534 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
-		1540B8041BB222D20092B534 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8031BB222D20092B534 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		1540B8021BB1D2EE0092B534 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8011BB1D2EE0092B534 /* FBSDKCoreKit.framework */; };
+		1540B8041BB222D20092B534 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1540B8031BB222D20092B534 /* FBSDKLoginKit.framework */; };
 		1567AD851BB08C76002708FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD841BB08C76002708FE /* AppDelegate.swift */; };
 		1567AD871BB08C76002708FE /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD861BB08C76002708FE /* loginViewController.swift */; };
 		1567AD8A1BB08C76002708FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD881BB08C76002708FE /* Main.storyboard */; };
 		1567AD8C1BB08C76002708FE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8B1BB08C76002708FE /* Images.xcassets */; };
 		1567AD8F1BB08C76002708FE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1567AD8D1BB08C76002708FE /* LaunchScreen.xib */; };
 		1567AD9B1BB08C76002708FE /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */; };
-		1569EB441BE834160003D3C6 /* wrongLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569EB431BE834160003D3C6 /* wrongLoginView.swift */; settings = {ASSET_TAGS = (); }; };
-		158066391BBEF7B80047DC54 /* annotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158066381BBEF7B80047DC54 /* annotationModel.swift */; settings = {ASSET_TAGS = (); }; };
-		1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597FC531BBAD9FC00838F64 /* mainMapView.swift */; settings = {ASSET_TAGS = (); }; };
+		158066391BBEF7B80047DC54 /* annotationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158066381BBEF7B80047DC54 /* annotationModel.swift */; };
+		1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597FC531BBAD9FC00838F64 /* mainMapView.swift */; };
 		1597FC561BBADCB100838F64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1597FC551BBADCB100838F64 /* MapKit.framework */; };
-		15A227131BCD86D000762257 /* mainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A227121BCD86D000762257 /* mainTableView.swift */; settings = {ASSET_TAGS = (); }; };
-		15E9F00E1BD1BEE1003D6C32 /* studentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9F00D1BD1BEE1003D6C32 /* studentsModel.swift */; settings = {ASSET_TAGS = (); }; };
-		15E9F0101BD2F27E003D6C32 /* addLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9F00F1BD2F27E003D6C32 /* addLocationView.swift */; settings = {ASSET_TAGS = (); }; };
+		15A227131BCD86D000762257 /* mainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A227121BCD86D000762257 /* mainTableView.swift */; };
+		15E9F00E1BD1BEE1003D6C32 /* studentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9F00D1BD1BEE1003D6C32 /* studentsModel.swift */; };
+		15E9F0101BD2F27E003D6C32 /* addLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9F00F1BD2F27E003D6C32 /* addLocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		1567AD941BB08C76002708FE /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1567AD991BB08C76002708FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1567AD9A1BB08C76002708FE /* OnTheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapTests.swift; sourceTree = "<group>"; };
-		1569EB431BE834160003D3C6 /* wrongLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wrongLoginView.swift; sourceTree = "<group>"; };
 		158066381BBEF7B80047DC54 /* annotationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = annotationModel.swift; sourceTree = "<group>"; };
 		1597FC531BBAD9FC00838F64 /* mainMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainMapView.swift; sourceTree = "<group>"; };
 		1597FC551BBADCB100838F64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -98,7 +96,6 @@
 				15E9F00F1BD2F27E003D6C32 /* addLocationView.swift */,
 				1597FC531BBAD9FC00838F64 /* mainMapView.swift */,
 				15A227121BCD86D000762257 /* mainTableView.swift */,
-				1569EB431BE834160003D3C6 /* wrongLoginView.swift */,
 			);
 			name = View;
 			path = ..;
@@ -287,7 +284,6 @@
 				1597FC541BBAD9FC00838F64 /* mainMapView.swift in Sources */,
 				15E9F00E1BD1BEE1003D6C32 /* studentsModel.swift in Sources */,
 				15A227131BCD86D000762257 /* mainTableView.swift in Sources */,
-				1569EB441BE834160003D3C6 /* wrongLoginView.swift in Sources */,
 				1567AD851BB08C76002708FE /* AppDelegate.swift in Sources */,
 				15E9F0101BD2F27E003D6C32 /* addLocationView.swift in Sources */,
 			);

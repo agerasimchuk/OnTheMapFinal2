@@ -22,10 +22,10 @@ class addLocationView: UIViewController, UISearchBarDelegate{
     var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
     var localSearch:MKLocalSearch!
-    var localSearchResponse:MKLocalSearchResponse!
     var error:NSError!
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
+    var localRequest = CLGeocoder()
     var lat: Double = 0.0
     var long: Double = 0.0
     var mytitle: String = ""
@@ -57,6 +57,9 @@ class addLocationView: UIViewController, UISearchBarDelegate{
     
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar){
+        
+        //INDICATE THAT ACTIVITY IS GOING ON THE BACKGROUND WHILE THE USER WAITS
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         /*
 //1: Once you click the keyboard search button, the app will dismiss the presented search controller you were presenting over the navigation bar. Then, the map view will look for any previously drawn annotation on the map and remove it since it will no longer be needed.
 */
@@ -67,29 +70,32 @@ class addLocationView: UIViewController, UISearchBarDelegate{
             self.mapView.removeAnnotation(annotation)
         }
         
-        /*
-//2: the search process will be initiated asynchronously by transforming the search bar text into a natural language query, the ‘naturalLanguageQuery’ is very important in order to look up for -even an incomplete- addresses and POI (point of interests) like restaurants, Coffeehouse, etc.
-*/
-        localSearchRequest = MKLocalSearchRequest()
-        localSearchRequest.naturalLanguageQuery = searchBar.text
-        localSearch = MKLocalSearch(request: localSearchRequest)
-        localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
-            
-            if localSearchResponse == nil{
+
+        
+        localRequest = CLGeocoder()
+        localRequest.geocodeAddressString(searchBar.text!){ (placemarks, error) -> Void in
+            if let firstPlacemark = placemarks?[0]{
+                print("FIRST PLACEMARK HERE: \(firstPlacemark)")
+                
+                //GET LAT AND LONG FROM THE PLACEMARK OBJECT IN ORDER TO ZOOM IN INTO A REGION
+                let lat = firstPlacemark.location?.coordinate.latitude
+                let long = firstPlacemark.location?.coordinate.longitude
+                print("LAT IS: \(lat)")
+                print("LONG IS: \(long)")
+                let span = MKCoordinateSpanMake(0.75, 0.75)
+                let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat!, longitude: long!), span: span)
+ 
+                self.mapView.addAnnotation(MKPlacemark(placemark: firstPlacemark))
+                self.mapView.setRegion(region, animated: true)
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }else{
                 let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
+                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 return
             }
-            //3
-            self.pointAnnotation = MKPointAnnotation()
-            self.pointAnnotation.title = searchBar.text
-            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
-            
-            
-            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
-            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
-            self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
+        
         }
     }
     
@@ -147,8 +153,6 @@ class addLocationView: UIViewController, UISearchBarDelegate{
 
     func presentAlert(messageString: String){
         
-        //dispatch_async(dispatch_get_main_queue(), {
-            
             //FORM AN ALERT
             var message = messageString
             
@@ -158,13 +162,13 @@ class addLocationView: UIViewController, UISearchBarDelegate{
             let okAction = UIAlertAction (title: "ok", style: UIAlertActionStyle.Default){ action in
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            
-                       //alertController.addAction(okAction)
+
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
 
             self.presentViewController(alertController, animated: true, completion: nil)
-        //})
+        
     }
 
     
 }
+

@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class mainTableView: UIViewController, UITableViewDelegate, UIScrollViewDelegate, UITableViewDataSource{
     
@@ -26,34 +27,53 @@ class mainTableView: UIViewController, UITableViewDelegate, UIScrollViewDelegate
         refreshMe()
      }
     
+     var students = convienceModel.sharedInstance().students
+    
     func refreshMe(){
         let studentLocations = convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) -> Void in
-    
-            let results = studentData
             
+            if success{
             let Locations : [[String:AnyObject]] = studentData
             self.students = studentsModel.studentsFromResults(Locations)
             print("STUDENTS IN VIEW DID LOAD: \(self.students))")
-            dispatch_async(dispatch_get_main_queue()) {
-                self.tableView.reloadData()
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }else{
+                print("Cannot download data")
             }
+            
         }
     }
     
+  
+
     @IBAction func refreshButton(sender: AnyObject) {
-        refreshMe()
+        let studentLocations = convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) in
+            
+            print("TABLE REFRESH: \(success)")
+            if success{
+                let Locations : [[String:AnyObject]] = studentData
+                self.students = studentsModel.studentsFromResults(Locations)
+                print("STUDENTS IN VIEW DID LOAD: \(self.students))")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }else{
+                print("Cannot download data")
             }
-    
-    override func viewWillAppear(animated: Bool) {
+            
+        }
+
+    }
+     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
     }
 
 
     //FORMATTING FOR THE TABLE http://www.raywenderlich.com/87975/dynamic-table-view-cell-height-ios-8-swift
-    
-    //NEED TO DECLARE THE STUDENTSMODEL VARIABLE TO ASSIGN THE JAYSON RESULTS TO IT
-    var students = [studentsModel]()
+
     
     @IBOutlet var tableView: UITableView!
 
@@ -74,16 +94,7 @@ class mainTableView: UIViewController, UITableViewDelegate, UIScrollViewDelegate
 
             cell.textLabel!.text = "\(student.first),  \(student.last)"
 
-            //cellSub.text = student.subtitle
             cell.detailTextLabel?.text = student.subtitle
-            
-            /*
-            var dateUpdated = object.updatedAt as NSDate
-            var dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "EEE, MMM d, h:mm a"
-            cell.updatedAtLabel.text = NSString(format: "%@", dateFormat.stringFromDate(dateUpdated))
-
-            */
 
              return cell
     }
@@ -120,21 +131,28 @@ class mainTableView: UIViewController, UITableViewDelegate, UIScrollViewDelegate
     }
     
     @IBAction func logoutButton(sender: AnyObject) {
-        func completeLogout() {
-            
-            convienceModel.sharedInstance().logoutAction()
-            
-            
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                print("In completeLogout")
-                
-                
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController")
-                self.presentViewController(controller, animated: true, completion: nil)
-            })
-        }
         
-
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        
+        completeLogout()
+        
+        
     }
+    
+    func completeLogout() {
+        
+        convienceModel.sharedInstance().logoutAction()
+        
+        
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            print("In completeLogout")
+            
+            
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController")
+            self.presentViewController(controller, animated: true, completion: nil)
+        })
+    }
+
 }

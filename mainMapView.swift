@@ -21,9 +21,6 @@ class mainMapView: UIViewController, MKMapViewDelegate{
     @IBOutlet var addNewLocation: UIBarButtonItem!
     @IBOutlet var refreshButton: UIBarButtonItem!
 
-    //var annotation: [locationModel] = [locationModel]()
-
-   
     
     let locationManager = CLLocationManager()
     
@@ -46,29 +43,32 @@ class mainMapView: UIViewController, MKMapViewDelegate{
         self.myMap.delegate = self
         
         convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) in
-            
-            
             if success{
-                print("STUDEND DATA: \(studentData)")
-            self.makeAnnotations(studentData)
+                self.makeAnnotations(studentData)
             }else{
-                
-                print("NO STUDEND DATA: \(studentData)")
-                self.presentAlert(errorString!)
+                self.presentAlert("Cannot download data")
             }
         }
-
-        
-}
+    }
+    
+    @IBAction func refreshAction(sender: AnyObject) {
+        convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) in
+            if success{
+                self.makeAnnotations(studentData)
+            }else{
+                self.presentAlert("Cannot download data")
+            }
+        }
+    }
 
     @IBOutlet var errorView: UIVisualEffectView!
     
     func presentAlert(messageString: String){
         
-        //dispatch_async(dispatch_get_main_queue(), {
-        
+
         //FORM AN ALERT
-        var message = messageString
+        let message = messageString
+
         
         let alertController = UIAlertController(title: "NEED INFORMATION!", message: message, preferredStyle:
             UIAlertControllerStyle.Alert)
@@ -77,11 +77,11 @@ class mainMapView: UIViewController, MKMapViewDelegate{
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
-        //alertController.addAction(okAction)
+
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alertController, animated: true, completion: nil)
-        //})
+       
     }
 
     
@@ -154,17 +154,11 @@ class mainMapView: UIViewController, MKMapViewDelegate{
 
     }
     
+
     
-    @IBAction func refreshAction(sender: AnyObject) {
-        //THIS CAN BE LATER MOVED TO THE MODEL AREA
-        convienceModel.sharedInstance().getStudentLocations { (success, studentData, errorString) in
-            if success{
-                self.makeAnnotations(studentData)
-            }else{
-                
-            }
-        }
-    }
+
+   
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
