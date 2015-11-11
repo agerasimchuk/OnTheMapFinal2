@@ -54,7 +54,7 @@ class addLocationView: UIViewController, UISearchBarDelegate{
         print("Error while updating location " + error.localizedDescription)
     }
     
-    
+
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar){
         
@@ -78,13 +78,18 @@ class addLocationView: UIViewController, UISearchBarDelegate{
                 print("FIRST PLACEMARK HERE: \(firstPlacemark)")
                 
                 //GET LAT AND LONG FROM THE PLACEMARK OBJECT IN ORDER TO ZOOM IN INTO A REGION
-                let lat = firstPlacemark.location?.coordinate.latitude
-                let long = firstPlacemark.location?.coordinate.longitude
+                var lat = firstPlacemark.location?.coordinate.latitude
+                var long = firstPlacemark.location?.coordinate.longitude
                 print("LAT IS: \(lat)")
                 print("LONG IS: \(long)")
                 let span = MKCoordinateSpanMake(0.75, 0.75)
                 let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat!, longitude: long!), span: span)
- 
+                
+                self.pointAnnotation = MKPointAnnotation()
+                self.pointAnnotation.title = searchBar.text
+                self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+
                 self.mapView.addAnnotation(MKPlacemark(placemark: firstPlacemark))
                 self.mapView.setRegion(region, animated: true)
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -108,6 +113,9 @@ class addLocationView: UIViewController, UISearchBarDelegate{
         let first: String? = firstName.text
         let second: String? = lastName.text
         let url: String? = urlLocation.text
+
+        
+        print("THIS IS MY LAT: \(lat)")
         
         if firstName.text!.isEmpty {
             print("emplye first name")
