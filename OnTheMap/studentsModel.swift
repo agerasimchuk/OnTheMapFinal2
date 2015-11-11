@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-//private let sharedInstance = studentsModel(dictionary: [String : AnyObject])
-
-
-private var students: [studentsModel] = [studentsModel]()
 
 class studentsModel {
     
@@ -31,7 +27,7 @@ class studentsModel {
     
     static func studentsFromResults(results: [[String : AnyObject]]) -> [studentsModel] {
         
-        var location = [studentsModel]()
+        var location = convienceModel.sharedInstance().students
         
         /* Iterate through array of dictionaries; each Movie is a dictionary */
         for result in results {
